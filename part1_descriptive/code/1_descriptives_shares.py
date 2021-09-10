@@ -1,7 +1,13 @@
 import setup_descriptives
 import pandas as pd
-from setup_descriptives import raw_dir, proc_dir, tab_dir, fig_dir
+import matplotlib
+import matplotlib.pyplot as plt
+
+from setup_descriptives import raw_dir, proc_dir, tab_dir, fig_dir, setup_figures
 from descriptive_helper import summary_one, threshold_calc, summary_tex, threshold_tex, threshold_reg_tex, plot_statevars
+
+
+setup_figures()
 
 f_vvs = raw_dir / 'vv_snacks.parquet'
 f_vvi = raw_dir / 'vvi_all.parquet'
@@ -104,5 +110,10 @@ print("\n")
 
 dft3
 
-
+pd.concat([a[['mars_conf_share']],b[['mars_conf_share']],c[['mars_conf_share']]],axis=1).plot(figsize=(20,10))
+plt.legend(['Full','Balanced','Experimental'])
+plt.xlabel('')
+plt.ylabel('Mars Share')
+plt.ylim(0,24)
+plt.savefig(f_fig_mars_share,bbox_inches='tight')
 
