@@ -1,19 +1,7 @@
-# rebates_replication
-Replication of Conlon and Mortimer (JPE 2021)
-(https://www.journals.uchicago.edu/doi/10.1086/716563)
+## Replication of Conlon and Mortimer
+## [Efficiency and Foreclosure Effects of Vertical Rebates: Empirical Evidence (JPE 2021)](https://www.journals.uchicago.edu/doi/10.1086/716563)
 
-
-# Requirements
-
-The following packages/dependencies are required to run the replication package
-1. Python 3.7 or higher (pandas, numpy, matplotlib, statsmodels, pyarrow)
-2. MATLAB (tested on R2020a): slmengine (SLM Toolbox)
-
-The python packages (appropriate versions) can be install via pip with 
-
-```pip install -r requirements.txt ```
-
-# Organization of files
+## Organization of files
 
 We organize the files in the replication package into two parts:
 1. Part 1 does the descriptive analysis (in Python)
@@ -29,7 +17,18 @@ PartX
 ./tables: tables produced by our code
 
 
-# List of Tables
+## Requirements
+
+The following packages/dependencies are required to run the replication package
+1. Python 3.7 or higher (pandas, numpy, matplotlib, statsmodels, pyarrow)
+2. MATLAB (tested on R2020a): slmengine (SLM Toolbox)
+
+The python packages (appropriate versions) can be install via pip with 
+
+```pip install -r requirements.txt ```
+
+
+## List of Tables
 We list each table and the code that produces it
 
 - Table 1 (table1_summary.tex): 2_descriptives_summaries.py
@@ -39,9 +38,9 @@ We list each table and the code that produces it
 - Table 5 (.tex): .py
 
 
-# List of Figures
+## List of Figures
 - Figure 1: This is a slide of contract terms we found, not produced by us.
-- Figure 2: ?
+- Figure 2: 
 - Figure 3: no
 - Figure 4: (statevars_mc15_iqr.pdf, statevars_mc15.pdf): 2_descriptives_summaries.py
 - Figure 5: no
