@@ -50,6 +50,3 @@ We list each table and the code that produces it
 - Figure A3:
 - Figure A4:
 - Figure A5:
-
-
-
