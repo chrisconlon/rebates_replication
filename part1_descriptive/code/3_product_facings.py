@@ -1,8 +1,13 @@
-#!/usr/bin/env python
-get_ipython().run_line_magic('load_ext', 'autoreload')
-get_ipython().run_line_magic('autoreload', '2')
+import setup_descriptives
+import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
 
-get_ipython().run_line_magic('run', 'setup_descriptives.py')
+from setup_descriptives import raw_dir, proc_dir, tab_dir, fig_dir, setup_figures
+from descriptive_helper import merge_df, compute_facings, plot_categories, plot_facings, plot_overall
+
+# get figure style
+setup_figures()
 
 f_vvs = raw_dir / 'vv_snacks.parquet'
 f_vvi = raw_dir / 'vvi_all.parquet'
@@ -11,35 +16,29 @@ f_prod = raw_dir / 'product_data.parquet'
 keep_cols=['vvs_id','pos_id','cus_id','ExpMachine','product_vends','Elapsed','mydate','month_end','quarter_end','balanced','exclusion','n_visits']
 export_cols=['vvs_id','pos_id','Elapsed','product_vends','week_of_year','ExpMachine','balanced','mydate','exclusion']
 
-from descriptive_helper import merge_df, compute_facings, plot_categories, plot_facings, plot_overall
 ## Set the threshold date
-
-
 tab_facings = tab_dir / 'facings_table.tex'
+
 # output (figures)
-fig_category = fig_dir / 'facings_category.pdf'
-fig_catmanuf_exp = fig_dir / 'facings_category_manuf_exp.pdf'
-fig_catmanuf_bal = fig_dir / 'facings_category_manuf_bal.pdf'
+fig_catmanuf_bal = fig_dir / 'fig2_facings_category_manuf_bal.pdf'
+fig_prod_bal = fig_dir / 'fig2_facings_prod_bal.pdf'
 
-fig_prod_exp = fig_dir / 'facings_prod_exp.pdf'
-fig_prod_bal = fig_dir / 'facings_prod_bal.pdf'
-fig_base_exp = fig_dir / 'facings_prod_base_exp.pdf'
-fig_base_bal = fig_dir / 'facings_prod_base_bal.pdf'
+# Appendix figures
+fig_category = fig_dir / 'fig_A1_facings_category.pdf'
+fig_catmanuf_exp = fig_dir / 'fig_A2_facings_category_manuf_exp.pdf'
+fig_base_exp = fig_dir / 'fig_A2_facings_prod_base_exp.pdf'
+fig_base_bal = fig_dir / 'fig_A3_facings_prod_base_bal.pdf'
+fig_prod_exp = fig_dir / 'fig_A3_facings_prod_exp.pdf'
 
-### Don't bother with weighted (basically identical)
-#fig_prod_exp_w = fig_dir / 'facings_prod_exp_w.pdf'
-#fig_prod_bal_w = fig_dir / 'facings_prod_bal_w.pdf'
-#fig_base_exp_w = fig_dir / 'facings_prod_base_exp_w.pdf'
-#fig_base_bal_w = fig_dir / 'facings_prod_base_bal_w.pdf'
+# read in the data
+prod=pd.read_parquet(f_prod)
+df1=pd.read_parquet(f_vvs)
+df2=pd.read_parquet(f_vvi)
 
-
-# In[2]:
-
-
-get_ipython().run_cell_magic('time', '', 'prod=pd.read_parquet(f_prod)\ndf1=pd.read_parquet(f_vvs)\ndf2=pd.read_parquet(f_vvi)\n\n\n# Filter for vvs_id in our sample\ndf2a=df2[df2.vvs_id.isin(df1.vvs_id.unique())]\n\nfacings=compute_facings(df2a,prod,sales_cutoff = 3e4)\nfacing_cols=facings.columns')
-
-
-# In[3]:
+# Filter for vvs_id in our sample
+df2a=df2[df2.vvs_id.isin(df1.vvs_id.unique())]
+facings=compute_facings(df2a,prod,sales_cutoff = 3e4)
+facing_cols=facings.columns
 
 
 # Filter df1 for our drops and balanced sample only -- otherwise we lose facings overtime as machines get smaller
@@ -56,24 +55,16 @@ def compute_facings_table(big_df):
 
 y1= compute_facings_table(big_df[big_df.balanced])
 y2= compute_facings_table(big_df[big_df.ExpMachine>0])
-pd.concat([y1,y2],axis=1).to_latex(tab_facings,column_format='l rrrr | rrrr')
-
+pd.concat([y1,y2],axis=1)#.to_latex(tab_facings,column_format='l rrrr | rrrr')
 
 # ## Overall facings
 # - Total by firm
-# - By firm x category pairs
-# - weighting by sales almost never matters
-
-# In[4]:
-
+# - weighting by sales doesn't matter
 
 plot_overall(big_df_plot)
 plt.savefig(fig_category,bbox_inches="tight")
 
-
-# In[5]:
-
-
+# by firm x category papers
 plot_categories(big_df_plot[big_df_plot.balanced])
 plt.savefig(fig_catmanuf_bal,bbox_inches='tight')
 plot_categories(big_df_plot[big_df_plot.ExpMachine>0])
@@ -86,11 +77,8 @@ plt.savefig(fig_catmanuf_exp,bbox_inches='tight')
 # - Nestle: Raisinets
 # - Hershey: Butterfinger
 # - Skip weighting schemes -- imperceptible difference
-
-
 plot_facings(big_df_plot[big_df_plot.balanced],use_weights=False)
 plt.savefig(fig_prod_bal,bbox_inches='tight')
-
 
 plot_facings(big_df_plot[big_df_plot.ExpMachine>0],use_weights=False)
 plt.savefig(fig_prod_exp,bbox_inches='tight')
@@ -98,9 +86,6 @@ plt.savefig(fig_prod_exp,bbox_inches='tight')
 
 # ### Base Mars Product Assortment
 # - These are high and stable (not affected)
-
-
-
 big_df_plot[big_df_plot.ExpMachine>0].groupby(['month_end']).mean()[['M&M Peanut','Twix','Snickers','Skittles/Starburst']].plot(figsize=(20,10),color=['navy', 'navy','navy','navy'],style=['-','-.','--',':','-','-.'])
 plt.xlabel('')
 plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),ncol=2)

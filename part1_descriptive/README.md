@@ -25,7 +25,9 @@ The following packages/dependencies are required to run the replication package
 
 The python packages (appropriate versions) can be install via pip with 
 
-```pip install -r requirements.txt ```
+```
+pip install -r requirements.txt
+```
 
 
 ## List of Tables
@@ -40,13 +42,15 @@ We list each table and the code that produces it
 
 ## List of Figures
 - Figure 1: This is a slide of contract terms we found, not produced by us.
-- Figure 2: 
+- Figure 2: () : 3_product_facings.py
 - Figure 3: no
 - Figure 4: (statevars_mc15_iqr.pdf, statevars_mc15.pdf): 2_descriptives_summaries.py
 - Figure 5: no
 
-- Figure A1: 
-- Figure A2:
-- Figure A3:
+- Figure A1: (fig_A1_facings_category.pdf): 3_product_facings.py
+- Figure A2: (fig_A2_facings_category_manuf_exp, fig_A2_facings_prod_base_exp): 3_product_facings.py
+- Figure A3: (fig_A3_facings_prod_base_bal, fig_A3_facings_prod_exp) : 3_product_facings.py
 - Figure A4:
 - Figure A5:
+
+
