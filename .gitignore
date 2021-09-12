@@ -124,3 +124,21 @@ part2_simulation/tables/*
 part2_simulation/proc_data/*
 
 
+# Figures
+*.pdf
+!README.pdf
+
+# Mac Garbage
+.DS_Store
+code.zip
+
+# Tables
+*.tex
+
+
+# Data
+*.parquet
+!product_data.parquet
+!vv_snacks.parquet
+!vvi_all.parquet
+
