@@ -1,5 +1,7 @@
 ## Replication of Conlon and Mortimer
-## [Efficiency and Foreclosure Effects of Vertical Rebates: Empirical Evidence (JPE 2021)](https://www.journals.uchicago.edu/doi/10.1086/716563)
+## Efficiency and Foreclosure Effects of Vertical Rebates: Empirical Evidence (JPE 2021)
+
+[https://www.journals.uchicago.edu/doi/10.1086/716563](https://www.journals.uchicago.edu/doi/10.1086/716563)
 
 ## Organization of files
 
