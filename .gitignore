@@ -112,3 +112,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# For replication package
+part1_descriptive/figures/*
+part1_descriptive/tables/*
+part1_descriptive/proc_data/*
+
+part2_simulation/figures/*
+part2_simulation/tables/*
+part2_simulation/proc_data/*
+
+
