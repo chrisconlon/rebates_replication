@@ -36,21 +36,19 @@ We list each table and the code that produces it
 - Table 1 (table1_summary.tex): 2_descriptives_summaries.py
 - Table 2 (table2_threshold.tex): 2_descriptives_summaries.py
 - Table 3 (table3_ols.tex): 2_descriptives_summaries.py
-- Table 4 (.tex):  .py
-- Table 5 (.tex): .py
-
+- Table 4 (.tex): ??? (Downstream)
+- Table 5 (.tex): ??? (Upstream)
+- Tables 6+: See Part 2
 
 ## List of Figures
 - Figure 1: This is a slide of contract terms we found, not produced by us.
-- Figure 2: () : 3_product_facings.py
-- Figure 3: no
+- Figure 2: (fig2_facings_category_manuf_bal, fig2_facings_prod_bal) : 3_product_facings.py
+- Figure 3: (Part2: Per period profits)
 - Figure 4: (statevars_mc15_iqr.pdf, statevars_mc15.pdf): 2_descriptives_summaries.py
-- Figure 5: no
+- Figure 5: (Part2: Threshold)
 
 - Figure A1: (fig_A1_facings_category.pdf): 3_product_facings.py
-- Figure A2: (fig_A2_facings_category_manuf_exp, fig_A2_facings_prod_base_exp): 3_product_facings.py
-- Figure A3: (fig_A3_facings_prod_base_bal, fig_A3_facings_prod_exp) : 3_product_facings.py
-- Figure A4:
-- Figure A5:
-
-
+- Figure A2: (fig_A2_facings_category_manuf_exp, fig2_facings_prod_bal): 3_product_facings.py
+- Figure A3: (fig_A3_facings_prod_base_bal, fig_A3_facings_prod_base_exp) : 3_product_facings.py
+- Figure A4: (fig2_facings_prod_bal, fig_A4_facings_prod_exp): 3_product_facings.py
+- Figure A5: (fig_2_statevars_mc15, fig_A5_statevars_mc15_iqr): 2_descriptive_summaries.py

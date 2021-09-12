@@ -26,9 +26,10 @@ fig_prod_bal = fig_dir / 'fig2_facings_prod_bal.pdf'
 # Appendix figures
 fig_category = fig_dir / 'fig_A1_facings_category.pdf'
 fig_catmanuf_exp = fig_dir / 'fig_A2_facings_category_manuf_exp.pdf'
-fig_base_exp = fig_dir / 'fig_A2_facings_prod_base_exp.pdf'
+fig_base_exp = fig_dir / 'fig_A3_facings_prod_base_exp.pdf'
 fig_base_bal = fig_dir / 'fig_A3_facings_prod_base_bal.pdf'
-fig_prod_exp = fig_dir / 'fig_A3_facings_prod_exp.pdf'
+fig_prod_exp = fig_dir / 'fig_A4_facings_prod_exp.pdf'
+
 
 # read in the data
 prod=pd.read_parquet(f_prod)

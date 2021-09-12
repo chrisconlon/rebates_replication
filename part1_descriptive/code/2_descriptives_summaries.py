@@ -26,8 +26,8 @@ f_tab_thrshold = tab_dir /'table2_threshold.tex'
 f_ols = tab_dir /'table3_ols.tex'
 
 # figures
-fig_statesvars = fig_dir / 'statevars_mc15.pdf'
-fig_statesvars_iqr = fig_dir / 'statevars_mc15_iqr.pdf'
+fig_statesvars = fig_dir / 'fig_2_statevars_mc15.pdf'
+fig_statesvars_iqr = fig_dir / 'fig_A5_statevars_mc15_iqr.pdf'
 
 # read in data
 prod=pd.read_parquet(f_prod)
