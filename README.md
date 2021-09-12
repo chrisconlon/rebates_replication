@@ -9,13 +9,14 @@ We organize the files in the replication package into two parts:
 1. Part 1 does the descriptive analysis (in Python)
 2. Part 2 does the numerical simulation model (in Matlab)
 
-Each part lives in a separate folder. Within each folder we separate files as
+Each part lives in a separate folder. Each folder has its own README with the corresponding list of Tables and Figures and where they are created.
 
-PartX
-./code : where the code lives and is run from
-./raw_data : inputs we provide as part of the replication package / or can provide upon request
+Within each folder we separate files as:
 
-Figures and Tables saved in eponymously named folders
+PartX/
+1. ./code : where the code lives and is run from
+2. ./raw_data : inputs we provide as part of the replication package / or can provide upon request
+3. Figures and Tables saved in eponymously named folders
 
 ## Requirements
 
