@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 
 ## List of Tables
-We list each table and the code that produces it
+We list each table and the code that produces it (for Part 1)
 
 - Table 1 (table1_summary.tex): 2_descriptives_summaries.py
 - Table 2 (table2_threshold.tex): 2_descriptives_summaries.py
