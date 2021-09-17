@@ -9,16 +9,11 @@ Change to the directory containing this file and run "./run_all.sh" on the termi
 
 | Table/Figure Number | Generating File (Data)      | Generating File (Table)      |
 | ------------------------ | -----------------------------|------------------------------ |  
-| Table 1                       |                                          |                                           |
-| Table 2                       |                                          |                                           |
-| Table 3                       |                                          |                                           |
-| Table 4                       |                                          |                                           |
-| Table 5                       |                                          |                                           |      
-| Table 6                       |                                          |                                           |
-| Table 7                       |                                          |                                           |
-| Table 8                       | (By Hand)                         | (By Hand)                           |
-| Table 9                       | calculate_all_tables.m     | Print Latex Tables.py          |
-| Table 10                     | run_threshold_figure.m    | Print Latex Tables.py         |
+| Table 6                      | (By Hand)                                          |                                          
+| Table 7                      | (By Hand)                                           |                                          
+| Table 8                      | calculate_all_tables       | Print Latex Tables.py 
+| Table 9                      | calculate_all_tables.m     | Print Latex Tables.py         |
+| Table 10                     | run_threshold_figure.m     | Print Latex Tables.py          |
 | Table 11                     | calculate_all_tables.m     | Print Latex Tables.py          |
 | Table 12                     | calculate_all_tables.m     | Print Latex Tables.py          |
 | Table 13                     | calculate_all_tables.m     | Print Latex Tables.py          | 

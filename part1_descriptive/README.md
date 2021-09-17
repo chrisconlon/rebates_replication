@@ -38,8 +38,8 @@ We list each table and the code that produces it (for Part 1)
 - Table 1 (table1_summary.tex): 2_descriptives_summaries.py
 - Table 2 (table2_threshold.tex): 2_descriptives_summaries.py
 - Table 3 (table3_ols.tex): 2_descriptives_summaries.py
-- Table 4 (.tex): ??? (Downstream)
-- Table 5 (.tex): ??? (Upstream)
+- Table 4 (table4.tex): 4_experiment_tables.py (Downstream)
+- Table 5 (table5.tex): 4_experiment_tables.py (Upstream)
 - Tables 6+: See Part 2
 
 ## List of Figures
