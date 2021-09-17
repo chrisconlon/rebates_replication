@@ -1,13 +1,16 @@
 import setup_descriptives
 import pandas as pd
+import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from collections import defaultdict
 
-from setup_descriptives import raw_dir, proc_dir
+from setup_descriptives import raw_dir, proc_dir, tab_dir
 
 # category consolidation
 d = defaultdict(lambda: 'Other')
+
+# working paper versions has a bug that drops Snyders
 d.update({16:'Mars',17:'Nestle',10:'Hershey'})
 
 # Experiment labels
@@ -16,6 +19,10 @@ exp_labels=['Snickers','Peanut M\&Ms','Snickers + Peanut M\&Ms']
 f_manuf = raw_dir / 'matched-manuf.csv'
 f_total = raw_dir / 'matched-revenues.csv'
 f_prod = raw_dir / 'product_data.parquet'
+
+
+fn_tab4 = tab_dir / 'table4.tex'
+fn_tab5 = tab_dir / 'table5.tex'
 
 def filter_exp(df):
     df.loc[df.exp_id==4,'exp_id']=8
@@ -52,14 +59,17 @@ table4['nobs']=table4.nobs.astype(int)
 table4=table4[['change','nobs','margin_wo','profit','tstat','margin_reb','profitr','tstatr']].round(2)
 table4.index = exp_labels
 print(table4)
-table4.to_latex(header=False)
+table4.to_latex(fn_tab4,header=False)
 
 # Table 5
-df_long=df1.groupby(['exp_id','manuf_id']).agg(change=('diffv',np.sum),nobs=('diffv',np.size),profit=('diffp',np.sum))
+df_long=df1.groupby(['exp_id','manuf_id']).agg(change=('diffv',np.sum),profit=('diffp',np.sum))
 df_wide=df_long['profit'].unstack()[['Mars','Hershey','Nestle','Other']]
 df_wide.index = exp_labels
-pd.concat([df_wide,table4.nobs],axis=1) 
-df_long.unstack()
+
+table5=df_wide.div(table4.nobs,axis=0)
+table5['wo_rebate']=(100.0*table5['Mars']/(table4['profit']+table5['Mars'])).round(1)
+table5['w_rebate']=(100.0*(table5['Mars']+(table4['profit']-table4['profitr']))/(table4['profit']+table5['Mars'])).round(1)
+table5.to_latex(fn_tab5,header=False)
 
 
 
