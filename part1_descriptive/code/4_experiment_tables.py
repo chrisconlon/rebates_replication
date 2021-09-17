@@ -14,9 +14,6 @@ f_manuf = raw_dir / 'matched-manuf.csv'
 f_total = raw_dir / 'matched-revenues.csv'
 f_prod = raw_dir / 'product_data.parquet'
 
-read_cols = ['vvs_id','new_pro_id','vended','dex_vended','par','capacity']
-export_cols_matlab=['vvs_id','Elapsed','percent_depleted','product_vends','average_daily_sales','ExpMachine','rank_ads']
-
 def filter_exp(df):
     df.loc[df.exp_id==4,'exp_id']=8
     return df[df.exp_id.isin([1,8,10])]
@@ -37,12 +34,12 @@ def margins(df):
     b=(x['Rebate1']/x['Vends1']-x['Rebate0']/x['Vends0'])
     return 100*pd.DataFrame({'margin_wo':a,'margin_reb':a+b})
 
-def consolidate_manuf(df):
+def consolidate_manuf(df, d):
     df['manuf_id']=df['manuf_id'].map(d)
     return df
 
 # read in data
-df1 = pd.read_csv(f_manuf).pipe(filter_exp).pipe(diff_fields).pipe(consolidate_manuf)
+df1 = pd.read_csv(f_manuf).pipe(filter_exp).pipe(diff_fields).pipe(consolidate_manuf, d)
 
 defaultdict = {16:'Mars',17:'Nestle',10:'Hershey'}
 # do Table 4
@@ -57,3 +54,6 @@ table4.to_latex(header=False)
 
 
 df_long=df1.groupby(['exp_id','manuf_id']).agg(change=('diffv',np.mean),nobs=('diffv',np.size),profit=('diffp',np.mean))
+df_wide=df_long['profit'].unstack()[['Mars','Hershey','Nestle','Other']]
+
+
