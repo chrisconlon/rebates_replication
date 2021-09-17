@@ -10,6 +10,9 @@ from setup_descriptives import raw_dir, proc_dir
 d = defaultdict(lambda: 'Other')
 d.update({16:'Mars',17:'Nestle',10:'Hershey'})
 
+# Experiment labels
+exp_labels=['Snickers','Peanut M\&Ms','Snickers + Peanut M\&Ms']
+
 f_manuf = raw_dir / 'matched-manuf.csv'
 f_total = raw_dir / 'matched-revenues.csv'
 f_prod = raw_dir / 'product_data.parquet'
@@ -40,20 +43,23 @@ def consolidate_manuf(df, d):
 
 # read in data
 df1 = pd.read_csv(f_manuf).pipe(filter_exp).pipe(diff_fields).pipe(consolidate_manuf, d)
-
-defaultdict = {16:'Mars',17:'Nestle',10:'Hershey'}
-# do Table 4
 df2 = pd.read_csv(f_total).pipe(filter_exp).pipe(diff_fields)
+
+# do Table 4
 table4=pd.concat([df2.groupby(['exp_id']).agg(change=('diffv',np.mean),nobs=('diffv',np.size),profit=('diffp',np.mean),
     tstat=('diffp',t_stat),profitr=('diffr',np.mean),tstatr=('diffr',t_stat)),margins(df2)],axis=1)
 table4['nobs']=table4.nobs.astype(int)
 table4=table4[['change','nobs','margin_wo','profit','tstat','margin_reb','profitr','tstatr']].round(2)
-table4.index = ['Snickers','Peanut M\&Ms','Snickers + Peanut M\&Ms']
+table4.index = exp_labels
 print(table4)
 table4.to_latex(header=False)
 
-
-df_long=df1.groupby(['exp_id','manuf_id']).agg(change=('diffv',np.mean),nobs=('diffv',np.size),profit=('diffp',np.mean))
+# Table 5
+df_long=df1.groupby(['exp_id','manuf_id']).agg(change=('diffv',np.sum),nobs=('diffv',np.size),profit=('diffp',np.sum))
 df_wide=df_long['profit'].unstack()[['Mars','Hershey','Nestle','Other']]
+df_wide.index = exp_labels
+pd.concat([df_wide,table4.nobs],axis=1) 
+df_long.unstack()
+
 
 
