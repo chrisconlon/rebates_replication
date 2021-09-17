@@ -32,3 +32,10 @@ The python packages (appropriate versions) can be install via pip with
 ```
 pip install -r requirements.txt
 ```
+
+
+### Data availability
+
+We have provided a subset of the full dataset for replication purposes within this package. We've anonymized some of the sensitive client information. The replication files should run and produce all of the tables and figures in the paper (except those drawn by hand, including the presenation slides, etc.).
+
+Certain intermeidate data products are constructed from a combination of raw materials (provided) and proprietary information (not provided) in those cases we provide the suitably anonymized intermediate data products.
